@@ -1,0 +1,20 @@
+/*.THIS.tab {
+  
+            width:auto;
+            height:auto;
+}
+.THIS.exampleHolder{
+    position: relative;
+    background-color: #16325c;
+    height: 80px;
+    
+}*/
+
+.THIS #tab1{
+    display: block;
+    table-layout: fixed;
+}
+
+.THIS .td-fixed-width {
+    width: 30rem;
+}

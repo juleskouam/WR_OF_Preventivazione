@@ -1,0 +1,162 @@
+<aura:component
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickActionWithoutHeader"
+    controller="WR_indexControllerApexNew" access="global">
+    <aura:attribute name="recordId" type="String" access="public" />
+    <aura:attribute name="visibStandard" type="boolean" default="false" access="public" />
+    <aura:attribute name="visibSpecial" type="boolean" default="false" access="public" />
+    <aura:attribute name="visibIndex" type="boolean" default="true" access="public" />
+    <aura:attribute name="spiner" type="boolean" default="false" access="public" />
+    <aura:attribute name="mydata" type="Object" />
+    <aura:attribute name="mycolumns" type="List" />
+    <aura:attribute name="referiementos" type="List" default="[]" />
+    <aura:attribute name="selectedRows" type="List" />
+    <aura:attribute name="mapPageList" type="Map" default="{}" />
+
+    <!--variables pour pargination -->
+    <!-- call doInit method on component load -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name='code' type='String' default='' />
+    <aura:attribute name='name' type='String' default='' />
+    <!-- aura attributes to store data/values -->
+    <aura:attribute name="PaginationList" type="List" />
+    <aura:attribute name="selectedCount" type="integer" default="0" description="selected Records Count" />
+    <aura:attribute name="startPage" type="Integer" />
+    <aura:attribute name="endPage" type="Integer" />
+    <aura:attribute name="totalRecordsCount" type="Integer" />
+    <aura:attribute name="pageSize" type="Integer" default="15"
+        description="number of records to be display on per page" />
+    <aura:attribute name="currentPage" type="integer" default="1" />
+    <aura:attribute name="totalPagesCount" type="integer" />
+    <aura:attribute name="bNoRecordsFound" type="boolean" />
+    <aura:attribute name="Listeselect" type="List" />
+
+
+
+    <!--Header-->
+    <div class="modal-header slds-modal__header slds-size_1-of-1">
+        <h4 class="title slds-text-heading–medium">Speciali</h4>
+    </div>
+    <!--Header-->
+
+    <aura:if isTrue="{!v.spiner}">
+        <lightning:spinner alternativeText="Loading" size="large" />
+    </aura:if>
+    <div class="slds-modal__content slds-col slds-size_12-of-12 ">
+
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_5-of-12">
+                <lightning:input aura:id="idcode" name="code" onkeyup="{!c.setValueFilterCode}" value="{!v.code}"
+                    placeholder="ricerca per codice" /> <!-- label="Codice dipendenza" -->
+            </div>
+
+            <div class="slds-col slds-size_5-of-12">
+                <lightning:input aura:id="idname" name="name" onkeyup="{!c.setValueFilterName}" value="{!v.name}"
+                    placeholder="ricerca per descrizione" /> <!-- label="Filiale" -->
+            </div>
+
+        </div>
+        <p class="slds-m-around_small">
+            <span class="slds-badge slds-badge_lightest" style="display:inline-block">
+                Total Records : {!v.selectedCount > 0 ? v.selectedCount + '/' : ''} {!v.totalRecordsCount}
+            </span>
+        </p>
+
+
+        <!-- data table start-->
+        <!-- <lightning:datatable 
+        class="tableHeader"
+        data="{! v.mydata }"
+        columns="{! v.mycolumns }"
+        keyField="RIFERIMENTO"
+        onrowselection="{! c.getSelectedName }"/> -->
+
+        <div class="slds-scrollable_y tab" style="height:25rem;">
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                <thead>
+                    <tr class="slds-text-title_caps">
+                        <!--header checkbox for select all-->
+                        <th style="width:3.25rem;" class="slds-text-align_right">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__control">
+                                    <label class="slds-checkbox">
+                                        <ui:inputCheckbox disabled="{!v.totalRecordsCount == 0}" aura:id="selectAllId"
+                                            change="{!c.selectAllCheckbox}" />
+                                        <span class="slds-checkbox_faux"></span>
+                                        <span class="slds-form-element__label"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="ProductCode">CODE</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Name">DESCIPTION</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.PaginationList}" var="obj" indexVar="index">
+                        <tr>
+                            <th scope="row" class="slds-text-align_right" style="width:3.25rem;">
+                                <div class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                        <label class="slds-checkbox">
+                                            <ui:inputCheckbox text="{!obj.ProductCode}" value="{!obj.isChecked}"
+                                                change="{!c.checkboxSelect}" />
+                                            <span class="slds-checkbox_faux"></span>
+                                            <span class="slds-form-element__label text"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="{!obj.ProductCode}">
+                                    {!obj.ProductCode} <br />
+                                </div>
+                            </th>
+                            <th scope="col" class="td-fixed-width">
+                                <div class="slds-cell-wrap">
+                                    {!obj.Name}
+                                </div>
+                            </th>
+
+
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+        </div>
+        <!-- DataTable End -->
+        <!-- <lightning:datatable 
+             class="tableHeader"
+             data="{!v.PaginationList}"
+             columns="{! v.mycolumns }"
+             keyField="RIFERIMENTO"
+             selectedRows="{! v.selectedRows }"
+             onrowselection="{!c.getSelectedName }"/>   -->
+        <!--  Pagination Buttons Start -->
+        <div class="slds-align_absolute-left">
+            <lightning:button label="" disabled="{!v.startPage == 0}" onclick="{!c.navigation}" variant="brand"
+                iconName="utility:back" name="previous" />
+
+            <span class="slds-badge slds-badge_lightest" style="margin-right: 10px;margin-left: 10px;">
+                Page {!v.currentPage} out of {!v.totalPagesCount}
+            </span>
+
+            <lightning:button label="" disabled="{!(v.endPage + 1) >= v.totalRecordsCount}" onclick="{!c.navigation}"
+                variant="brand" iconName="utility:forward" iconPosition="right" name="next" />
+        </div>
+        <br />
+        <!--  Pagination Buttons End -->
+
+    </div>
+
+
+
+    <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+        <lightning:button variant="Brand" class="slds-button" label="precedente" onclick="{!c.precedente }" />
+        <lightning:button variant="Brand" class="slds-button" label="salva" onclick="{!c.handleClick}" />
+        <lightning:button variant="Neutral" class="slds-button" label="Annulla" onclick="{!c.handleExit}" />
+    </div>
+</aura:component>

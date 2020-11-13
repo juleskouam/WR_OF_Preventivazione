@@ -1,0 +1,71 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickActionWithoutHeader,lightning:isUrlAddressable" controller="WR_indexControllerApexNew"  access="global">
+    <aura:attribute name="note1" type="Boolean" default="false" />
+    <aura:attribute name="note2" type="Boolean" default="false" />
+    <aura:attribute name="spinner" type="Boolean" default="false" />
+    <aura:attribute name="valuenote1" type="String" default="" />
+    <aura:attribute name="valuenote2" type="String" default="" />
+    <aura:attribute name="recordId" type="String" access="public" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:html tag="style">
+   .slds-p-around–medium {
+    padding: 0rem !important;
+    }
+    .slds-modal__content{
+    overflow-y:hidden !important;
+    height:unset !important;
+    max-height:unset !important;
+    }
+    .cuf-content {
+     padding: 0 0rem !important;
+     }
+</aura:html>
+  
+    <!--Header-->
+          <div class="modal-header slds-modal__header slds-size_1-of-1">
+          <h4 class="title slds-text-heading–medium">Scelta attività</h4>
+         </div>
+    <!--Header-->
+
+    <aura:if isTrue="{!spinner}">
+     <div class="exampleHolder">
+        <lightning:spinner alternativeText="Loading" size="large" />
+    </div>
+    </aura:if>
+ 
+  <lightning:layout  verticalAlign="center" >
+      <lightning:layoutItem padding="around-small">
+          <div class="section">
+
+             <form class="slds-form_stacked" align="center">
+                 
+               <fieldset class="field"> 
+                   <legend>
+                       <p><b>Selezionare un'attività:</b></p><br />
+                        </legend>
+               
+                       <lightning:input type="checkbox" aura:id="check1"  onchange="{!c.onCheck}" label="Nessuna attività OL espletabile"/>
+                       <aura:if isTrue="{!v.note1}"> <lightning:input type="text" aura:id="expenseform1" label="Note"
+                                                      name="valuenote1" value="{!v.valuenote1}" required="true"/></aura:if>
+                       <lightning:input type="checkbox" aura:id="check2" onchange="{!c.onCheck2}" label="Nessuna attività OL non espletabile"/> 
+                       <aura:if isTrue="{!v.note2}"><lightning:input type="text" aura:id="expenseform" label="Note"
+                                     name="valuenote2" value="{!v.valuenote2}" required="true" /></aura:if>
+                       <lightning:input type="checkbox" aura:id="check3"  onchange="{!c.onCheck}" label="Tratta soggetta ad IRU da PTA/PTE/ROE a UI "/>
+                       <lightning:input type="checkbox" aura:id="check4"  onchange="{!c.onCheck}" label="Opere civili da PTA/PTE/ROE a UI"/>
+                       <lightning:input type="checkbox" aura:id="check5"  onchange="{!c.onCheck}" label="IRU tra POP - PTA/PTE/ROE"/>
+                       <lightning:input type="checkbox" aura:id="check6"  onchange="{!c.onCheck}" label="Opere Civili tra POP - PTA/PTE/ROE"/>
+                    
+                       
+                
+                     </fieldset>
+                 </form>
+          </div>
+         </lightning:layoutItem>
+      </lightning:layout>
+    
+    
+    <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+        <lightning:button variant="Brand" class="slds-button" label="Salva" onclick="{!c.handleClick}"/>
+        <lightning:button variant="Neutral" class="slds-button" label="Annulla" onclick="{!c.handleExit}"/>
+      </div>
+
+</aura:component>

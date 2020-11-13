@@ -1,0 +1,18 @@
+.THIS .section{
+            position: relative;
+            display: inline-block;
+            padding: 5px;
+            font-family: arial;
+            text-decoration: none;
+            width:auto;
+            height:auto;
+           text-align:left;
+            
+            
+        }
+.THIS .error{
+            
+            font-size: 20px;
+            color: red;
+           
+        }

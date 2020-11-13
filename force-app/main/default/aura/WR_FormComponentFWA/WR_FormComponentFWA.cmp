@@ -1,0 +1,74 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickActionWithoutHeader,lightning:isUrlAddressable" controller="WR_indexControllerApexNew" access="global">
+<aura:attribute name="visib" type="boolean" default="false" />
+<aura:attribute name="visib0" type="boolean" default="false" />
+<aura:attribute name="valuechamp2" type="String" default="" />
+<aura:attribute name="valuechamp4" type="String" default="" />
+<aura:attribute name="valuechamp5" type="String" default="" />
+<aura:attribute name="recordId" type="String" access="public" />
+
+    
+<aura:html tag="style">
+.slds-p-around–medium {
+padding: 0rem !important;
+}
+.slds-modal__content{
+overflow-y:hidden !important;
+height:unset !important;
+max-height:unset !important;
+}
+.cuf-content {
+padding: 0 0rem !important;
+}
+
+</aura:html>
+
+<!--Header-->
+<div class="modal-header slds-modal__header slds-size_1-of-1">
+<h4 class="title slds-text-heading–medium">Scelta attività</h4>
+</div>
+<!--Header-->
+      
+<div  >
+  <lightning:layout  verticalAlign="center" >
+      <lightning:layoutItem padding="around-small">
+          <div class="section">
+
+             <form class="slds-form_stacked" align="center">
+                 
+               <fieldset class="field"> 
+                   <legend>
+                       <p>Elemento selezionato per FWA:</p><br />
+                        </legend>
+               
+                       <lightning:select name="select1" label="Installazione Palo fino a 3 m" onchange="{!c.doSomething}" aura:id="select1">
+                       <option value="">scegliene uno</option>
+                       <option value="SI">SI</option>
+                       <option value="NO">NO</option>
+                       </lightning:select>
+                       <aura:if isTrue="{!v.visib0}">
+                       <lightning:input type="text" name="input2" label="Lunghezza Palo" required="true" value="{!v.valuechamp2}" aura:id="champ1"/>
+                       </aura:if>
+                        <lightning:select name="select2" label="Installazione Palo telescopico oltre 3m" onchange="{!c.doSomething1}" aura:id="select2">
+                       <option value="">scegliene uno</option>
+                       <option value="SI">SI</option>
+                       <option value="NO">NO</option>
+                       </lightning:select>
+                      
+                      <aura:if isTrue="{!v.visib}">
+                      <lightning:input type="text" label="Lunghezza Palo Telescopico" name="input4" value="{!v.valuechamp4}"  required="true" aura:id="champ2"/>
+                      </aura:if>
+                      <lightning:input type="text" name="input5" label="Installazione Piatta forma Aerea" value="{!v.valuechamp5}" />
+                
+                     </fieldset>
+                 </form>
+          </div>
+         </lightning:layoutItem>
+      </lightning:layout>
+    </div>
+    
+      <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+        <lightning:button variant="Brand" class="slds-button" label="Salva" onclick="{!c.handleClick}"/>
+        <lightning:button variant="Neutral" class="slds-button" label="Annulla" onclick="{!c.handleExit}"/>
+      </div>
+  
+</aura:component>

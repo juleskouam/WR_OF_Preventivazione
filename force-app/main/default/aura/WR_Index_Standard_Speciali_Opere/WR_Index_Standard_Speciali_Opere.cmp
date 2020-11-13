@@ -1,0 +1,64 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickActionWithoutHeader" controller="WR_indexControllerApexNew" access="global" >
+     <aura:attribute name="value" type="String" default="" />
+     <aura:attribute name="error" type="boolean" default="false"/>
+    <aura:attribute name="visibStandard" type="boolean" default="false" access="public"/>
+    <aura:attribute name="visibSpecial" type="boolean" default="false" access="public"/>
+    <aura:attribute name="spiner" type="boolean" default="true" access="public"/>
+    <aura:attribute name="visibIndex" type="boolean" default="true" access="public"/>
+    <aura:attribute name="recordId" type="String" access="public" />
+    <aura:attribute name="cluste" type="String" access="public"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:html tag="style">
+   .slds-p-around–medium {
+    padding: 0rem !important;
+    }
+    .slds-modal__content{
+    overflow-y:hidden !important;
+    height:unset !important;
+    max-height:unset !important;
+    }
+    .cuf-content {
+     padding: 0 0rem !important;
+     }
+</aura:html>
+
+    
+         <!-- <div style="float:center;" class="slds-m-horizontal_xx-small">
+        <img src="{!$Resource.tagliMash + '/imgMash/logo-openfiber.png'}"/>
+        </div> -->
+    <aura:if isTrue="{!v.visibIndex}">
+     <!--Header-->
+          <div class="modal-header slds-modal__header slds-size_1-of-1">
+          <h4 class="title slds-text-heading–medium">scelta opere civili</h4>
+         </div>
+      <!--Header-->
+     </aura:if>
+    
+   
+ 
+          <div class="section">
+           <aura:if isTrue="{!v.visibStandard}">   
+                 <c:WR_FormComponent_Standard recordId="{!v.recordId}" visibIndex="{!v.visibIndex}" visibStandard="{!v.visibStandard}" visibSpecial="{!v.visibSpecial}"/> 
+           </aura:if> 
+    
+           <aura:if isTrue="{!v.visibIndex}">
+                <lightning:input type="radio" aura:id="checkStandard"  name="opere"  label=" Opere Civili Standard"/>
+                <lightning:input type="radio" aura:id="checkSpecial" name="opere"  label="Opere Civili Speciali"/>
+           </aura:if>
+    
+          
+           <aura:if isTrue="{!v.visibSpecial}">         
+               <c:WR_FormComponent_Speciali recordId="{!v.recordId}" visibIndex="{!v.visibIndex}" visibStandard="{!v.visibStandard}" visibSpecial="{!v.visibSpecial}" spiner="{!v.spiner}"/>
+          </aura:if>
+         </div> 
+
+   
+  <aura:if isTrue="{!v.visibIndex}"> 
+  <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+        <lightning:button variant="Brand" class="slds-button" label="seguente" onclick="{!c.handleClick}"/>
+        <lightning:button variant="Neutral" class="slds-button" label="Annulla" onclick="{!c.handleExit}"/>
+      </div> 
+   </aura:if>
+ 
+    
+</aura:component>

@@ -1,0 +1,28 @@
+@media screen and (max-width: 600px){
+.THIS.container{
+      display: none;
+    
+}}
+
+ .THIS .section{
+             /*font: 1rem 'Fira Sans', sans-serif;
+             color: #5e81f4;*/
+            font-size: 16px;
+            padding: 5px;
+            font-family: arial;
+            text-decoration: none;
+            width:auto;
+            height:auto;
+           text-align:left;
+            
+        }
+.THIS .text2{
+             border-color:blue ;
+             border:1px solid white;
+             padding:3px;
+    
+        }
+.THIS label{
+           font-size: 80%;
+    
+        }

@@ -1,0 +1,107 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickActionWithoutHeader" controller="WR_indexControllerApexNew" access="global" >
+<aura:attribute name="recordId" type="String" access="public" />
+<aura:attribute name="visibStandard" type="boolean" default="false" access="public"/>
+<aura:attribute name="visibSpecial" type="boolean" default="false" access="public"/>
+<aura:attribute name="visibIndex" type="boolean" default="true" access="public"/>
+<aura:attribute name="note" type="boolean" default="false" access="public"/>
+<!--   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->    
+<aura:attribute name="mydata" type="Object"/>
+<aura:attribute name="mycolumns" type="List"/>
+<aura:attribute name="referiementos" type="List"/>
+
+    
+<aura:handler name="init" value="{! this }" action="{! c.init }"/>
+   
+
+<!--   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->   
+    
+<!--Header-->
+          <div class="modal-header slds-modal__header slds-size_1-of-1">
+          <h4 class="title slds-text-heading–medium">standard</h4>
+         </div>
+ <!--Header    class="tableHeader"  -->
+    
+    <!-- <lightning:datatable 
+        class="slds-cell-wrap"
+        data="{! v.mydata }"
+        columns="{! v.mycolumns }"
+        keyField="RIFERIMENTO"
+        onrowselection="{! c.getSelectedName }"/> -->
+         <div  style="height:20rem;">
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                <thead>
+                    <tr class="slds-text-title_caps">
+                        <!--header checkbox for select all-->
+                        <th style="width:3.25rem;" class="slds-text-align_right">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__control">
+                                    <label class="slds-checkbox">
+                                        <ui:inputCheckbox disabled="{!v.totalRecordsCount == 0}" aura:id="selectAllId"
+                                            change="{!c.selectAllCheckbox}" />
+                                        <span class="slds-checkbox_faux"></span>
+                                        <span class="slds-form-element__label"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="ProductCode">CODE</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Name">DESCIPTION</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.mydata}" var="obj" indexVar="index">
+                        <tr>
+                            <th scope="row" class="slds-text-align_right" style="width:3.25rem;">
+                                <div class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                        <label class="slds-checkbox">
+                                            <ui:inputCheckbox text="{!obj.ProductCode}" value="{!obj.isChecked}"
+                                                change="{!c.checkboxSelect}" />
+                                            <span class="slds-checkbox_faux"></span>
+                                            <span class="slds-form-element__label text"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="{!obj.ProductCode}">
+                                    {!obj.ProductCode} <br />
+                                </div>
+                            </th>
+                            <th scope="col" class="td-fixed-width">
+                                <div class="slds-cell-wrap">
+                                    {!obj.Name}
+                                </div>
+                            </th>
+
+
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+        </div>
+    <aura:if isTrue="{!v.note}"> <lightning:input type="text" aura:id="expenseform1" label="Note"
+                                                      name="valuenote" value="{!v.valuenote}" required="true"/></aura:if>
+    <br/><br/>
+
+   <!-- <lightning:input type="checkbox" aura:id="check1"  onchange="{!c.onCheck}" label="OP.CIV.01 | Opere Civili: Opere di scavo per tratte fino a 3 metri, anche non continuativi, compresi nella tratta ROE/Box di derivazione a confine Proprietà Privata. "/><br/>
+                       <lightning:input type="checkbox" aura:id="check2"  onchange="{!c.onCheck}" label="OP.CIV.02 | Opere Civili: Opere di scavo per tratte da 3 a 10 metri, anche non continuativi, compresi nella tratta ROE/Box di derivazione a confine Proprietà Privata."/><br/>
+                       <lightning:input type="checkbox" aura:id="check3"  onchange="{!c.onCheck}" label="OP.CIV.03 | Opere di scavo per tratte superiori a 10 metri (anche non continuativi) e relativi ripristini.La voce si applica per i soli metri eccedenti i 10 metri."/>
+    <aura:if isTrue="{!v.note}"> <lightning:input type="text" aura:id="expenseform1" label="Note"
+                                                      name="valuenote" value="{!v.valuenote}" required="true"/></aura:if><br/>
+                       <lightning:input type="checkbox" aura:id="check4"  onchange="{!c.onCheck}" label="OP.CIV.04 | Fornitura e posa pozzetto 20x20 comprensivo di chiusino C250"/><br/>   -->
+       
+     
+    
+  <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+      
+
+        <lightning:button variant="Brand" class="slds-button" label="precedente" onclick="{!c.precedente}"/>
+        <lightning:button variant="Brand" class="slds-button" label="salva  " onclick="{!c.handleClick}"/>
+        <lightning:button variant="Neutral" class="slds-button" label="Annulla" onclick="{!c.handleExit}"/>
+  </div> 
+</aura:component>
