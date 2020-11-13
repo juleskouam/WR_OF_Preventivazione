@@ -5,13 +5,14 @@
                      var reference = component.get('v.referiementos');
                      var ref=[];
                      var record = component.get('v.recordId');
+                     var note=component.get('v.valuenote')
                      for (var i = 0; i < reference.length; i++){
                          if(reference[i]!=''){
                            ref.push(reference[i]);  
                          }
                      }
                      var action = component.get("c.getProductMatch_last");
-                     action.setParams({"riferimentos":ref,"recordId":record});
+                     action.setParams({"riferimentos":ref,"recordId":record,"note":note});
                      action.setCallback(this, function(response) {
                      var state = response.getState();
                      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");

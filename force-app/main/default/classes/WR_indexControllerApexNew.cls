@@ -81,9 +81,11 @@ public static List<Product2> getProductMatchTasck(Id recordId) {
     }
 //last version---------------------------------------------------------------------------------    
     @AuraEnabled
-public static Void getProductMatch_last(Id recordId, List<String> riferimentos) {
+public static Void getProductMatch_last(Id recordId, List<String> riferimentos, String note) {
  System.debug('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'+riferimentos + 'recordId' +recordId);
     List<Product2> produits=[SELECT id,ProductCode,Name FROM Product2 WHERE ProductCode IN :riferimentos];
+    Task__c task=[SELECT id,WR_Note__c FROM Task__c WHERE id=:recordId];
+    task.WR_Note__c=note;
     //String idtask=(String)recordId;
     //List<Task> tasks=[SELECT Id FROM Task WHERE ID=:recordId];
     List<ProducTask__c> productasks=[SELECT id,Product__c,idTask__c FROM ProducTask__c WHERE task__c=:recordId];
@@ -102,10 +104,12 @@ public static Void getProductMatch_last(Id recordId, List<String> riferimentos) 
         
     }
     System.debug('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ avant' +productasksave);
+    update task;
     insert productasksave;
     System.debug('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ recordId' +productasksave);
     System.debug(produits);
     }
+
     
      @AuraEnabled
 public static List<Product2> getProductMatchTasck_last(Id recordId) {
@@ -120,6 +124,7 @@ public static List<Product2> getProductMatchTasck_last(Id recordId) {
     return products;
     
     }
+    
   //controlleur pour chargement des produit de spécialité@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
   
  @AuraEnabled     
