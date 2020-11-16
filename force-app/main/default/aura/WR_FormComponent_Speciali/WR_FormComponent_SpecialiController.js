@@ -153,7 +153,7 @@
        
                  component.set("v.visibSpecial",'false');
                 component.set("v.visibStandard",'false');
-                component.set("v.visibIndex",'true');
+                component.set("v.visibSpeAeB",'true');
                component.set("v.spiner", true);
             
        
@@ -167,7 +167,7 @@
         var selectedRows = event.getParam('selectedRows');
       
 
-    },
+    }
      /*getSelectedName: function (cmp, event) {
         var selectedRows = event.getParam('selectedRows');
         var referiementos=cmp.get('v.referiementos');

@@ -5,12 +5,14 @@
     <aura:attribute name="visibStandard" type="boolean" default="false" access="public" />
     <aura:attribute name="visibSpecial" type="boolean" default="false" access="public" />
     <aura:attribute name="visibIndex" type="boolean" default="true" access="public" />
+    <aura:attribute name="visibSpeAeB" type="boolean" default="false" access="public"/>
     <aura:attribute name="spiner" type="boolean" default="false" access="public" />
     <aura:attribute name="mydata" type="Object" />
     <aura:attribute name="mycolumns" type="List" />
     <aura:attribute name="referiementos" type="List" default="[]" />
     <aura:attribute name="selectedRows" type="List" />
     <aura:attribute name="mapPageList" type="Map" default="{}" />
+   
 
     <!--variables pour pargination -->
     <!-- call doInit method on component load -->

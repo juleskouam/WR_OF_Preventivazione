@@ -2,8 +2,7 @@ public class WR_indexControllerApexNew {
     
     @AuraEnabled
 public static Task__c getTask(Id recordId) {
-    System.debug('WR_indexControllerApexNew.getTask.recordId: ' + recordId);
-  return[SELECT Id, WR_Tipologia_Richiesta__c, WR_Cluster__c FROM Task__c WHERE Id=:recordId];
+  return[SELECT WR_Tipologia_Richiesta__c FROM Task__c WHERE Id=:recordId];
   
     }
     
@@ -80,7 +79,7 @@ public static List<Product2> getProductMatchTasck(Id recordId) {
     
     }
 //last version---------------------------------------------------------------------------------    
-    @AuraEnabled
+  @AuraEnabled
 public static Void getProductMatch_last(Id recordId, List<String> riferimentos, String note) {
  System.debug('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'+riferimentos + 'recordId' +recordId);
     List<Product2> produits=[SELECT id,ProductCode,Name FROM Product2 WHERE ProductCode IN :riferimentos];
@@ -109,7 +108,6 @@ public static Void getProductMatch_last(Id recordId, List<String> riferimentos, 
     System.debug('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ recordId' +productasksave);
     System.debug(produits);
     }
-
     
      @AuraEnabled
 public static List<Product2> getProductMatchTasck_last(Id recordId) {
@@ -124,7 +122,6 @@ public static List<Product2> getProductMatchTasck_last(Id recordId) {
     return products;
     
     }
-    
   //controlleur pour chargement des produit de spécialité@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
   
  @AuraEnabled     

@@ -6,7 +6,9 @@
     <aura:attribute name="spiner" type="boolean" default="true" access="public"/>
     <aura:attribute name="visibIndex" type="boolean" default="true" access="public"/>
     <aura:attribute name="recordId" type="String" access="public" />
-    <!-- <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> -->
+    <aura:attribute name="cluster" type="String" access="public" />
+    <aura:attribute name="visibSpeAeB" type="boolean" default="false" access="public"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     <aura:html tag="style">
    .slds-p-around–medium {
     padding: 0rem !important;
@@ -37,7 +39,7 @@
  
           <div class="section">
            <aura:if isTrue="{!v.visibStandard}">   
-                 <c:WR_FormComponent_Standard recordId="{!v.recordId}" visibIndex="{!v.visibIndex}" visibStandard="{!v.visibStandard}" visibSpecial="{!v.visibSpecial}"/> 
+                 <c:WR_FormComponent_Standard recordId="{!v.recordId}" visibIndex="{!v.visibIndex}" visibStandard="{!v.visibStandard}" visibSpecial="{!v.visibSpecial}" visibSpeAeB="{!v.visibSpeAeB}"/> 
            </aura:if> 
     
            <aura:if isTrue="{!v.visibIndex}">
@@ -47,8 +49,12 @@
     
           
            <aura:if isTrue="{!v.visibSpecial}">         
-               <c:WR_FormComponent_Speciali recordId="{!v.recordId}" visibIndex="{!v.visibIndex}" visibStandard="{!v.visibStandard}" visibSpecial="{!v.visibSpecial}" spiner="{!v.spiner}"/>
+               <c:WR_FormComponent_Speciali recordId="{!v.recordId}" visibIndex="{!v.visibIndex}" visibStandard="{!v.visibStandard}" visibSpecial="{!v.visibSpecial}" spiner="{!v.spiner}" visibSpeAeB="{!v.visibSpeAeB}"/>
           </aura:if>
+              
+              <aura:if isTrue="{!v.visibSpeAeB}">
+                  <c:WR_OpereSpeciali_AeB recordId="{!v.recordId}" spiner="{!v.spiner}" visibIndex="{!v.visibIndex}" visibStandard="{!v.visibStandard}" visibSpecial="{!v.visibSpecial}" visibSpeAeB="{!v.visibSpeAeB}"/>
+              </aura:if>
          </div> 
 
    

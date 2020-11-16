@@ -5,6 +5,7 @@
 <aura:attribute name="visibIndex" type="boolean" default="true" access="public"/>
 <aura:attribute name="note" type="boolean" default="false" access="public"/>
 <aura:attribute name="valuenote" type="String" default="" access="public"/>
+<aura:attribute name="visibSpeAeB" type="boolean" default="false" access="public"/>
 <!--   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->    
 <aura:attribute name="mydata" type="Object"/>
 <aura:attribute name="mycolumns" type="List"/>

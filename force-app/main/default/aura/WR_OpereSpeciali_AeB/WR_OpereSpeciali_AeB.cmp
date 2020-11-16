@@ -1,0 +1,59 @@
+<aura:component controller="WR_OpereSpecialiABCtl" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+    <aura:attribute name="recordId" type="String" access="public" />
+    <aura:attribute name="spiner" type="boolean" default="true" access="public"/>
+    <aura:attribute name="preCheck" type="boolean" default="true" access="public"/>
+    <aura:attribute name="uploadCheck" type="boolean" default="false" access="public"/>
+    <aura:attribute name="accept" type="String" default=".xls, .xlsx"/>
+    <aura:attribute name="fileName" type="String" default="No File Selected..." />
+    <aura:attribute name="disabled" type="Boolean" description="Displays input disabled" default="false"/>
+    <aura:attribute name="isLoadInactive" type="Boolean" default="true" />
+    <aura:attribute name="visibStandard" type="boolean" default="false" access="public" />
+    <aura:attribute name="visibSpecial" type="boolean" default="false" access="public" />
+    <aura:attribute name="visibIndex" type="boolean" default="false" access="public" />
+    <aura:attribute name="visibSpeAeB" type="boolean" default="true" access="public"/>
+    <aura:attribute name="content" type="String" />
+    <aura:attribute name="tipoContratto" type="String" />
+    
+    <ltng:require scripts="{!$Resource.XLSX}"/>
+	<ltng:require scripts="{!$Resource.jszip}"/>
+	<ltng:require scripts="{!$Resource.jszipmin}"/>
+    
+    <aura:if isTrue="{!v.preCheck}">
+        <div class="modal-header slds-modal__header slds-size_1-of-1">
+            <h4 class="title slds-text-heading–medium">scelta contratto</h4>
+        </div>
+    
+    
+        <lightning:input type="radio" aura:id="checkNew"  name="opere"  label="Caricamento Opere Speciali A&amp;B Nuovo Contratto"/>
+        <lightning:input type="radio" aura:id="checkOld" name="opere"  label="Caricamento Opere Speciali A&amp;B"/>
+        <lightning:input type="radio" aura:id="checkPro" name="opere" label="Caricamento Opere Speciali C&amp;D"/>
+        <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+             <lightning:button variant="Brand" class="slds-button" label="precedente" onclick="{!c.precedente }" />
+            <lightning:button variant="Brand" class="slds-button" label="Prosegui" onclick="{!c.handleNext}"/>
+            <lightning:button variant="Neutral" class="slds-button" label="Annulla" onclick="{!c.handleExit}"/>
+        </div>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.uploadCheck}">
+        <div class="slds-p-around_medium " style="background-color:white">
+            <div class="slds-align_absolute-center">
+                
+                <lightning:input aura:id="upload"
+                                 onchange="{!c.onTableImport}"
+                                 type="file"
+                                 accept="{!v.accept}"
+                                 disabled="{!v.disabled}"/>
+                
+                
+            </div>
+            <div class="slds-text-body_regular slds-text-color_success slds-align_absolute-center">{!v.fileName} </div>
+            
+            <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+                <lightning:button variant="Neutral" class="slds-button" label="Annulla" onclick="{!c.handleExit}" />
+                <lightning:button variant="Neutral" class="slds-button" label="Carica File" onclick="{!c.doSave}" disabled="{!v.isLoadInactive}" />
+            </div>
+        </div>
+    </aura:if>
+    
+</aura:component>

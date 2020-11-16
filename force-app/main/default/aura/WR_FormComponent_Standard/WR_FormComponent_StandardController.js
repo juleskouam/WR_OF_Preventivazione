@@ -5,7 +5,7 @@
                      var reference = component.get('v.referiementos');
                      var ref=[];
                      var record = component.get('v.recordId');
-                     var note=component.get('v.valuenote')
+                     var note=component.get('v.valuenote');
                      for (var i = 0; i < reference.length; i++){
                          if(reference[i]!=''){
                            ref.push(reference[i]);  
