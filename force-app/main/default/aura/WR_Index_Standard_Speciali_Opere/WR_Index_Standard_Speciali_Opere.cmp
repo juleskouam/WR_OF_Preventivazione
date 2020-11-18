@@ -4,7 +4,7 @@
     <aura:attribute name="visibStandard" type="boolean" default="false" access="public"/>
     <aura:attribute name="visibSpecial" type="boolean" default="false" access="public"/>
     <aura:attribute name="spiner" type="boolean" default="true" access="public"/>
-    <aura:attribute name="visibIndex" type="boolean" default="true" access="public"/>
+    <aura:attribute name="visibIndex" type="boolean" default="false" access="public"/>
     <aura:attribute name="recordId" type="String" access="public" />
     <aura:attribute name="cluster" type="String" access="public" />
     <aura:attribute name="visibSpeAeB" type="boolean" default="false" access="public"/>
@@ -35,7 +35,10 @@
       <!--Header-->
      </aura:if>
     
-   
+         
+           <aura:if isTrue="{!v.error}">   
+            <h4 style="color:red;">Non si può inserire opere civili  se tecnologia è FWA</h4>
+           </aura:if>
  
           <div class="section">
            <aura:if isTrue="{!v.visibStandard}">   

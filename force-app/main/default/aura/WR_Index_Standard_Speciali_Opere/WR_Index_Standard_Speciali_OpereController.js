@@ -4,7 +4,7 @@
         
         var recordId = component.get("v.recordId");
         var action = component.get("c.getTask");
-    console.log('recordId ', recordId);
+        console.log('recordId ', recordId);
         action.setParams({
             recordId : recordId
         });
@@ -13,8 +13,16 @@
             console.log('state ', state);
             if(state === "SUCCESS") {
                 var task = response.getReturnValue();
+                var tr=task.WR_Tipologia_Richiesta__c;
+                if(tr=='1'){
+                    
+                	component.set("v.error",'true');
+                    component.set("v.visibIndex",'false');
+                }else{
+                component.set("v.visibIndex",'true');
                 console.log('cluster ', task.WR_Cluster__c);
                 component.set("v.cluster", task.WR_Cluster__c);
+                    }
             } else {
                 console.log('ERROR: ', response.getReturnValue());
             }
@@ -34,10 +42,10 @@
                 	component.set("v.visibSpeAeB",'true');
                 } else {
                     
-                   component.set("v.visibSpecial",'false');
+                   component.set("v.visibSpecial",'true');
                 	component.set("v.visibStandard",'false');
                 	component.set("v.visibIndex",'false');
-                	component.set("v.visibSpeAeB",'true');
+                	component.set("v.visibSpeAeB",'false');
                 }
                  
             }else{
