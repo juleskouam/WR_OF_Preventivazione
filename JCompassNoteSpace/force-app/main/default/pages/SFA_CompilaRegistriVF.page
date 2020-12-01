@@ -1,0 +1,17 @@
+<apex:page standardController="SFA_NotaSpese__c" recordSetVar="SFANotaSpese">
+    <apex:includeLightning />
+    <div id="LcDisplayId"> </div> 
+    
+ <script>
+    $Lightning.use("c:SFA_CompilaRegistriApp", function() {
+    $Lightning.createComponent("c:SFA_CompilaRegistri2",
+    {  
+        textColor : "Red",
+   },
+   "LcDisplayId",
+    function(component) {
+        console.log('Component created, do something cool here');
+    });
+ });
+ </script>
+</apex:page>

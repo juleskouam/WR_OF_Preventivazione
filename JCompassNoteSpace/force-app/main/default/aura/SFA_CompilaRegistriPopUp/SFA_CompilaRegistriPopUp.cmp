@@ -1,0 +1,45 @@
+<aura:component>
+    <!--Boolean attribute to indicate if modal is open or not 
+       default value is false as modal is closed when page is loaded 
+    -->
+    <aura:handler name="init" action="{!c.init}" value="{!this}" />
+    <aura:attribute name="isModalOpen" type="boolean" default="true" access="public"/>
+     <aura:attribute name="notaSpese" type="SFA_NotaSpese__c" default="{}" access="public"/>
+    <aura:attribute name="orariMyHr" type="List" access="public"/>
+    <aura:attribute name="orarioInizioMyHr" type="Object" default="manuale" access="public"/>
+    <aura:attribute name="orarioFineMyHr" type="Object" default="manuale" access="public"/>
+    <aura:attribute name="ivia" type="boolean" access="public"/>
+    <aura:attribute name="veri" type="boolean" access="public"/>
+    
+    
+    <aura:if isTrue="{!v.isModalOpen}">
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+    <div class="slds-modal__container">
+    <header class="slds-modal__header">
+      <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+        
+        <span class="slds-assistive-text">Close</span>
+      </button>
+      <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Compila Registri</h2>
+    </header>
+    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+      <c:SFA_CompilaRegistri2/>
+    </div> 
+    
+    
+                    <!--Modal/Popup Box Footer Starts here-->
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="neutral"
+                                          label="Cancel"
+                                          title="Cancel"
+                                          onclick="{! c.closeModel }"/>
+                        <lightning:button variant="brand"
+                                          label="OK"
+                                          title="OK"
+                                          onclick="{!c.submitDetails}"/>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </aura:if>
+</aura:component>
