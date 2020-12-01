@@ -23,40 +23,40 @@ public with sharing class TTM_StatusHandler {
         integer pesi=integer.valueOf(cs.Max__c);
         for(TTM_Diagnosi__c d:listDia){
             if(d.TTM_Stato__c==STATO_DA_DISPACCIARE){
-                integer newPesi1=integer.valueOf(cs.DA_DISPACCIARE__c);
-                if(newPesi1<=pesi){
-                    pesi=newPesi1;
+                integer dadispacciare=integer.valueOf(cs.DA_DISPACCIARE__c);
+                if(dadispacciare<=pesi){
+                    pesi=dadispacciare;
                     statu=d.TTM_Stato__c;
                 }
             }else{   if(d.TTM_Stato__c==STATO_IN_APPUNTAMENTO){
-                integer newPesi2=integer.valueOf(cs.IN_APPUNTAMENTO__c);
-                if(newPesi2<=pesi){
-                    pesi=newPesi2;
+                integer inapp=integer.valueOf(cs.IN_APPUNTAMENTO__c);
+                if(inapp<=pesi){
+                    pesi=inapp;
                     statu=d.TTM_Stato__c;
                 }
             }else{
                 if(d.TTM_Stato__c==STATO_ON_FIELD){
-                integer newPesi3=integer.valueOf(cs.ON_FIELD__c);
-                if(newPesi3<=pesi){
-                    pesi=newPesi3;
+                integer onfield=integer.valueOf(cs.ON_FIELD__c);
+                if(onfield<=pesi){
+                    pesi=onfield;
                     statu=d.TTM_Stato__c;
                 }else{
                     if(d.TTM_Stato__c==STATO_SOSPESO){
-                integer newPesi4=integer.valueOf(cs.SOSPESO__c);
-                if(newPesi4<=pesi){
-                    pesi=newPesi4;
+                integer sospeso =integer.valueOf(cs.SOSPESO__c);
+                if(sospeso<=pesi){
+                    pesi=sospeso;
                     statu=d.TTM_Stato__c;
                 }else{
                     if(d.TTM_Stato__c==STATO_COLLAUDO_TEC){
-                integer newPesi5=integer.valueOf(cs.COLLAUDO_TECNICO__c);
-                if(newPesi5<=pesi){
-                    pesi=newPesi5;
+                integer collaudo =integer.valueOf(cs.COLLAUDO_TECNICO__c);
+                if(collaudo<=pesi){
+                    pesi=collaudo;
                     statu=d.TTM_Stato__c;
                 }else{
                     if(d.TTM_Stato__c==STATO_IN_CARICO){
-                integer newPesi6=integer.valueOf(cs.IN_CARICO__c);
-                if(newPesi6<=pesi){
-                    pesi=newPesi6;
+                integer incarico =integer.valueOf(cs.IN_CARICO__c);
+                if(incarico<=pesi){
+                    pesi=incarico;
                     statu=d.TTM_Stato__c;
                }
               }
